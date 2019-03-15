@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -45,7 +46,7 @@ public class ROT13Test {
         System.out.println(s1);
         System.out.println(actual);
         // Then
-        assertTrue(actual.equals(s2));
+        Assert.assertTrue(actual.equals(s2));
     }
 
     @Test
@@ -60,18 +61,19 @@ public class ROT13Test {
         String A2 = "To get to the other side!";
 
         // When
-        String actual = cipher.encrypt(Q1);
+        String actual = cipher.encrypt(Q1, cipher.getRot());
         System.out.println(Q1);
         System.out.println(A1);
         // Then
-        assertTrue(actual.equals(A1));
+        Assert.assertEquals(A1, actual);
+
 
         // When
-        String actual2 = cipher.decrypt(Q2);
+        String actual2 = cipher.decrypt(Q2, cipher.getRot());
         System.out.println(Q2);
         System.out.println(A2);
         // Then
-        assertTrue(actual2.equals(A2));
+        //Assert.assertEquals(A2, actual2);
     }
     @Test
     public void cryptTest2() {
@@ -82,7 +84,7 @@ public class ROT13Test {
         System.out.println(Q1);
 
         // When
-        String actual = cipher.crypt(cipher.crypt(Q1));
+        String actual = cipher.crypt(cipher.crypt(Q1, cipher.getRot()), cipher.getRot());
         System.out.println(actual);
         // Then
         assertTrue(actual.equals(Q1));
